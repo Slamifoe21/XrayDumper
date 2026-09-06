@@ -36,12 +36,12 @@ func main() {
 func mainImpl() int {
 	cfg, err := parseFlags()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "\nОшибка: %v", err)
+		fmt.Fprintf(os.Stderr, "\nОшибка: %v\n", err)
 		return 1
 	}
 
 	if err := run(cfg); err != nil {
-		fmt.Fprintf(os.Stderr, "\nКритическая ошибка: %v", err)
+		fmt.Fprintf(os.Stderr, "\nКритическая ошибка: %v\n", err)
 		return 1
 	}
 	return 0
