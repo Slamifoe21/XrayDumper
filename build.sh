@@ -1,2 +1,2 @@
 #!/bin/bash
-go build -ldflags="-s -w" -trimpath -o ./output/
+go build -ldflags="-s -w" -trimpath -o ./output/xd-linux
