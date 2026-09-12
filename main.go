@@ -14,12 +14,18 @@ import (
 	"time"
 )
 
+var (
+	version = "dev"
+	commit  = "none"
+)
+
 type Config struct {
-	URL      string
-	HWID     string
-	OutFile  string
-	Timeout  int
-	Insecure bool
+	URL         string
+	HWID        string
+	OutFile     string
+	Timeout     int
+	Insecure    bool
+	ShowVersion bool
 }
 
 func main() {
@@ -48,6 +54,11 @@ func mainImpl() int {
 }
 
 func run(cfg Config) error {
+	if cfg.ShowVersion {
+		printVersion()
+		return nil
+	}
+
 	httpClient := &http.Client{
 		Timeout: time.Duration(cfg.Timeout) * time.Second,
 	}
@@ -97,8 +108,18 @@ func parseFlags() (Config, error) {
 		false,
 		"Отключить проверку TLS-сертификата (небезопасно)",
 	)
+	flag.BoolVar(
+		&cfg.ShowVersion,
+		"version",
+		false,
+		"Показать версию и выйти",
+	)
 
 	flag.Parse()
+
+	if cfg.ShowVersion {
+		return cfg, nil
+	}
 
 	cfg.URL = strings.TrimSpace(cfg.URL)
 	cfg.OutFile = strings.TrimSpace(cfg.OutFile)
@@ -220,4 +241,8 @@ func saveLinks(outputFilename string, links []string) error {
 	}
 
 	return nil
+}
+
+func printVersion() {
+	fmt.Printf("xd %s (commit %s)\n", version, commit)
 }
