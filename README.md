@@ -6,7 +6,7 @@
 
 ## Требования
 
-Скачайте и установите [go](https://go.dev/dl/)
+Скачайте и установите [go](https://go.dev/dl/) и [git](https://git-scm.com/)
 
 ## Сборка
 
