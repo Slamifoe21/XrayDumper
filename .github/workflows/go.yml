@@ -67,27 +67,36 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
+  
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
+  
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
           merge-multiple: true
-
+  
       - name: Generate checksums
         run: |
           cd artifacts
+  
           sha256sum xd-* > checksums.txt
+  
+          echo "=== RELEASE FILES ==="
+          ls -lah
+  
+          echo "=== CHECKSUMS ==="
           cat checksums.txt
-
+  
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: artifacts/*
+          files: |
+            artifacts/xd-*
+            artifacts/checksums.txt
           generate_release_notes: true
           draft: false
           prerelease: false
