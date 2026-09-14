@@ -78,9 +78,9 @@ jobs:
           path: artifacts
           merge-multiple: true
       - name: Generate checksums
-      run: |
-        cd artifacts
-        sha256sum * > checksums.txt
+        run: |
+          cd artifacts
+          sha256sum * > checksums.txt
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
