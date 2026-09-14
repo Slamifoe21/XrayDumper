@@ -48,10 +48,6 @@ checksum:
   algorithm: sha256
 
 release:
-  github:
-    owner: YOUR_GITHUB_USERNAME
-    name: YOUR_REPOSITORY
-
   draft: false
   prerelease: false
 
